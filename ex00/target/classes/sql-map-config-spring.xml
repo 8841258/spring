@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
- 
- <configuration>
- 
- </configuration>
+
+<configuration>
+	<settings>
+		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.yedam.app.Employees" alias="emp"/>
+		<!-- 패키지만 적어 주면 알아서 alias 생성 -->
+		<package name="com.yedam.app" />
+	</typeAliases>
+</configuration>
