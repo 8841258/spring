@@ -28,7 +28,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+		//request.setAttribute("속성명", 값);
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home"; //forward

@@ -17,7 +17,7 @@ import lombok.extern.java.Log;
 
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src\\main\\webapp\\WEB-INF\\spring\\root-context.xml")
+@ContextConfiguration("classpath:/spring/*-context.xml")
 public class EmpMapperClient {
 
 	@Autowired EmpMapper dao;

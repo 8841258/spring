@@ -9,7 +9,6 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.yedam.app.Employees" alias="emp"/>
 		<!-- 패키지만 적어 주면 알아서 alias 생성 -->
 		<package name="com.yedam.app" />
 	</typeAliases>
