@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 1. 컨테이너에 빈 등록, CLASS에 대문자 입력 후 CTRL+SPACE 누르면 알아서 풀으로 찾아줌 -->
+<!--   	<bean id="sony" class="co.yedam.app.SonyTV" /> 
+   	<bean id="samsung" class="co.yedam.app.SamsungTV" /> 
+	<bean id="apple" class="co.yedam.app.AppleSpeaker" />  --> 
+	
+	<!-- 2. 자동으로 컨테이너에 빈 등록 : class 위에 @Component . namespaces에서 context 체크해줘야함 -->
+	<context:component-scan base-package="co.yedam.app"></context:component-scan>
+	
+</beans>
