@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.pooh.app.board.mapper.BoardMapper">
+	<select id="getList" resultType="BoardVO">
+		SELECT BNO,
+			   TITLE,
+			   CONTENT,
+			   WRITER,
+			   REGDATE,
+			   UPDATEDATE
+		FROM TBL_BOARD
+		WHERE BNO > 0
+		ORDER BY BNO DESC
+	</select>
+
+	<!-- 파라미터 타입은 안 적어줘도 된다. 그러나 ResultType은 필수 -->
+	<select id="read" parameterType="BoardVO" resultType="BoardVO">
+		SELECT BNO,
+			   TITLE,
+			   CONTENT,
+			   WRITER,
+			   REGDATE,
+			   UPDATEDATE
+		FROM TBL_BOARD
+		WHERE BNO = #{bno}
+	</select>
+	
+	<insert id="insert">
+		<selectKey keyProperty="bno" resultType="Long" order="BEFORE">
+			SELECT SEQ_BOARD.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TBL_BOARD(
+								BNO,
+								TITLE,
+								CONTENT,
+								WRITER
+								)
+		VALUES(
+				#{bno},
+				#{title},
+				#{content},
+				#{writer}
+				)
+	</insert>
+	
+	<update id="update">
+		UPDATE TBL_BOARD
+		SET TITLE = #{title},
+			CONTENT = #{content},
+			UPDATEDATE = sysdate
+		WHERE BNO = #{bno}
+	</update>
+	
+	<delete id="delete">
+		DELETE TBL_BOARD
+		WHERE BNO = #{bno}
+	</delete>
+</mapper>
