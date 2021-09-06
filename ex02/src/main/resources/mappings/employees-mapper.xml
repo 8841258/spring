@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.pooh.app.emp.mapper.EmployeesMapper">
+	<select id="getList" resultType="EmployeesVO">
+		SELECT EMPLOYEE_ID,
+		LAST_NAME,
+		HIRE_DATE,
+		EMAIL,
+		SALARY
+		FROM EMPLOYEES
+	</select>
+
+	<select id="getListWithPaging" resultType="EmployeesVO">
+		SELECT EMPLOYEE_ID,
+			   FIRST_NAME,
+			   LAST_NAME, 
+			   EMAIL,
+			   PHONE_NUMBER,
+			   HIRE_DATE, 
+			   JOB_ID,
+			   SALARY,
+			   COMMISSION_PCT,
+			   MANAGER_ID,
+			   DEPARTMENT_ID
+		FROM
+		(
+				SELECT /*+ INDEX_DESC(EMPLOYEES EMP_EMP_ID_PK) */
+						ROWNUM RN, 
+						EMPLOYEE_ID,
+			   			FIRST_NAME,
+			   			LAST_NAME, 
+			   			EMAIL,
+			   			PHONE_NUMBER,
+			   			HIRE_DATE, 
+			   			JOB_ID,
+			   			SALARY,
+			   			COMMISSION_PCT,
+			   			MANAGER_ID,
+			   			DEPARTMENT_ID
+				   FROM EMPLOYEES
+				   <![CDATA[ WHERE ROWNUM <= #{pageNum} * #{amount} ]]>
+				   )
+		WHERE RN > (#{pageNum} - 1) * #{amount}
+	</select>
+
+	<select id="read" parameterType="EmployeesVO"
+		resultType="EmployeesVO">
+		SELECT EMPLOYEE_ID,
+			   FIRST_NAME,
+			   LAST_NAME, 
+			   EMAIL,
+			   PHONE_NUMBER,
+			   HIRE_DATE, 
+			   JOB_ID,
+			   SALARY,
+			   COMMISSION_PCT,
+			   MANAGER_ID,
+			   DEPARTMENT_ID
+		FROM EMPLOYEES
+		WHERE EMPLOYEE_ID = #{employeeId}
+	</select>
+
+	<insert id="insert">
+
+	</insert>
+
+	<update id="update">
+
+	</update>
+
+	<delete id="delete">
+
+	</delete>
+</mapper>
