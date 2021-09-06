@@ -3,6 +3,7 @@ package co.pooh.app.board;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class BoardControllerClient {
 	}
 	
 	@Test
+	@Ignore
 	public void testList() throws Exception {
 		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
 						.andReturn()
@@ -42,4 +44,15 @@ public class BoardControllerClient {
 		
 	}
 
+	@Test
+	public void testRegister() throws Exception {
+		log.info(mockMvc.perform(MockMvcRequestBuilders.post("/board/register")
+						.param("title", "테스트 제목")
+						.param("content", "테스트 내용")
+						.param("writer", "user10"))
+						.andReturn()
+						.getModelAndView()
+						.getViewName()
+						);
+	}
 }
