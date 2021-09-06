@@ -12,8 +12,27 @@ tr:hover {
 </style>
 
 <script>
+	
 	$(function() {
-		$('#board').DataTable();
+	let actionForm = $("#actionForm");
+		$(".move").on("click", function(e) {
+			e.preventDefault();
+			
+			let bno = $(this).attr('href');
+			
+			actionForm.append('<input type="hidden" name="bno" value="'+ bno +'">');
+			actionForm.attr('action', "get");
+			actionForm.submit();
+		});
+
+		$("#pageButton a").on("click", function(e) {
+			e.preventDefault();
+			let p = $(this).attr("href");
+			$("[name='pageNum']").val(p);
+			
+			actionForm.submit();
+		})
+		//$('#board').DataTable();
 	});
 </script>
 
@@ -37,9 +56,9 @@ tr:hover {
 				</thead>
 				<tbody>
 					<c:forEach var="board" items="${list }">
-						<tr onclick="location.href='get?bno=${board.bno }'">
+						<tr>
 							<td>${board.bno }</td>
-							<td>${board.title }</td>
+							<td><a class="move" href="${board.bno }">${board.title }</a></td>
 							<td>${board.writer }</td>
 							<td><fmt:formatDate value="${board.regdate }"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
@@ -49,7 +68,46 @@ tr:hover {
 					</c:forEach>
 				</tbody>
 			</table>
-			<button type="button" class="btn btn-outline btn-info" onclick="location.href='${pageContext.request.contextPath }/board/register'">등록</button>
+			<form id="actionForm" action="list" method="get">
+				<select name="type">
+					<option value="" ${empty pageMaker.criteria.type ? 'selected' : "" }>선택</option>
+					<option value="T" ${pageMaker.criteria.type=='T' ? 'selected' : "" }>제목</option>
+					<option value="C" ${pageMaker.criteria.type=='C' ? 'selected' : "" }>내용</option>
+					<option value="W" ${pageMaker.criteria.type=='W' ? 'selected' : "" }>작성자</option>
+					<option value="TC" ${pageMaker.criteria.type=='TC' ? 'selected' : "" }>제목 or 내용</option>
+					<option value="TW" ${pageMaker.criteria.type=='TW' ? 'selected' : "" }>제목 or 작성자</option>
+					<option value="TCW" ${pageMaker.criteria.type=='TCW' ? 'selected' : "" }>제목 or 내용 or 작성자</option>
+				</select>
+				<input name="keyword" value="${pageMaker.criteria.keyword }"> 
+				<input type="hidden" name="pageNum"
+					value="${pageMaker.criteria.pageNum }">
+					<input
+					type="hidden" name="amount" value="${pageMaker.criteria.amount }">
+					<button class="btn btn-outline btn-info">검색</button>
+			</form>
+			<div id="pageButton">
+				<div class='pull-right'>
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev }">
+							<li class="paginate_button previous"><a
+								href="${pageMaker.startPage - 1}" class="move">이전</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }">
+							<li class="paginate_button"><a href="${num }">${num }</a></li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next }">
+							<li class="paginate_button next"><a
+								href="${pageMaker.endPage + 1}" class="move">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
+
+			<button type="button" class="btn btn-outline btn-info"
+				onclick="location.href='${pageContext.request.contextPath }/board/register'">등록</button>
 		</div>
 	</div>
 </div>

@@ -10,9 +10,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import co.pooh.app.board.mapper.BoardMapper;
 import co.pooh.app.board.service.BoardService;
 import co.pooh.app.board.vo.BoardVO;
+import co.pooh.app.board.vo.Criteria;
 import lombok.extern.java.Log;
 
 @Log
@@ -23,10 +23,13 @@ public class BoardMapperClient {
 	@Autowired BoardService boardMapper;
 	
 	@Test
-	@Ignore
+//	@Ignore
 	@Rollback
 	public void getList() {
-		log.info(boardMapper.getList().toString());
+		Criteria criteria = new Criteria(1, 100);
+		criteria.setType("C");
+		criteria.setKeyword("화장실");
+		log.info(boardMapper.getList(criteria).toString());
 	}
 	
 	@Test
@@ -41,7 +44,7 @@ public class BoardMapperClient {
 	}
 	
 	@Test
-//	@Ignore
+	@Ignore
 	@Rollback
 	public void read() {
 		BoardVO vo = new BoardVO();
@@ -51,7 +54,7 @@ public class BoardMapperClient {
 	}
 
 	@Test
-//	@Ignore
+	@Ignore
 	public void update() {
 		BoardVO vo = new BoardVO();
 		vo.setBno(3);

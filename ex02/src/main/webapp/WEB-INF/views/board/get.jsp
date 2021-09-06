@@ -31,5 +31,6 @@
 	<button class="btn btn-outline btn-info">수정</button>
 	<button class="btn btn-outline btn-info"
 	formaction="${pageContext.request.contextPath }/board/delete">삭제</button>
+	<button type="button" class="btn btn-outline btn-info" onclick="location.href='pageNum=${criteria.pageNum}&amount=${criteria.amount}'">목록으로</button>
 </form>
 <%@ include file="/WEB-INF/views/includes/footer.jsp"%>

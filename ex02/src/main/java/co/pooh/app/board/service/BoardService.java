@@ -3,6 +3,7 @@ package co.pooh.app.board.service;
 import java.util.List;
 
 import co.pooh.app.board.vo.BoardVO;
+import co.pooh.app.board.vo.Criteria;
 
 public interface BoardService {
 	//CRUD
@@ -20,5 +21,8 @@ public interface BoardService {
 	public BoardVO read(BoardVO vo);
 	
 	//전체조회
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(Criteria criteria);
+	
+	//데이터 건수 조회
+	public int getTotalCount(Criteria criteria);
 }

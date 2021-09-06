@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import co.pooh.app.board.mapper.BoardMapper;
 import co.pooh.app.board.service.BoardService;
 import co.pooh.app.board.vo.BoardVO;
+import co.pooh.app.board.vo.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -39,9 +40,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getList() {
+	public List<BoardVO> getList(Criteria criteria) {
 		// TODO Auto-generated method stub
-		return boardMapper.getList();
+		return boardMapper.getList(criteria);
+	}
+	
+	//데이터 건수 조회
+	public int getTotalCount(Criteria criteria) {
+		
+		return boardMapper.getTotalCount(criteria);
 	}
 
 }
