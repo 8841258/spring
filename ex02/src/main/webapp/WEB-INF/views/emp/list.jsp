@@ -26,7 +26,7 @@
 					<c:forEach var="emp" items="${list }">
 						<tr>
 							<td>${emp.employeeId }</td>
-							<td><a href="/emp/read?employeeId=${emp.employeeId }">${emp.lastName }</a></td>
+							<td><a href="${pageContext.request.contextPath }/emp/read?employeeId=${emp.employeeId }">${emp.lastName }</a></td>
 							<td><fmt:formatDate value="${emp.hireDate }" pattern="yyyy-MM-dd" /></td>
 							<td>${emp.email}</td>
 							<td>${emp.salary}</td>

@@ -3,14 +3,14 @@ package co.pooh.app.emp.domain;
 import lombok.Data;
 
 @Data
-public class PageVO {
+public class EmpPageVO {
 	private int startPage;
 	private int endPage;
 	private boolean prev, next;
 	private int total;				//전체 레코드 건수
 	private EmpCriteria criteria;		//pageNum, amount
 
-	public PageVO(EmpCriteria cri, int total) {
+	public EmpPageVO(EmpCriteria cri, int total) {
 		super();
 		this.criteria = cri;
 		this.total = total;
