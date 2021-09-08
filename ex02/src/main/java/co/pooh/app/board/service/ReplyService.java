@@ -17,4 +17,6 @@ public interface ReplyService {
 	public int update(ReplyVO vo);
 	
 	public int delete(ReplyVO vo);
+	
+	int getCountByBno(ReplyVO vo);
 }

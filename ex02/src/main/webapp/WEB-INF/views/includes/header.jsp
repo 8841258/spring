@@ -304,7 +304,7 @@
                             <a href="${pageContext.request.contextPath }/emp/list"><i class="fa fa-table fa-fw"></i> 사원명단</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-bar-chart-o fa-fw"></i> Tables</a>
+                            <a href="/userPage"><i class="fa fa-bar-chart-o fa-fw"></i> 사용자 관리</a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>

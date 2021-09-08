@@ -19,5 +19,5 @@ public class BoardVO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date regdate;    //작성일자
 	private Date updatedate; //수정일자
-	
+	private int replyCnt;
 }

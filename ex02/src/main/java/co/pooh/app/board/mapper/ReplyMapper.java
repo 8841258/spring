@@ -18,4 +18,5 @@ public interface ReplyMapper {
 	
 	int delete(ReplyVO vo);
 	
+	int getCountByBno(ReplyVO vo);
 }

@@ -55,7 +55,7 @@
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
-				<i class="fa fa-comments fa-fw"></i> 댓글
+				<i class="fa fa-comments fa-fw"></i> 댓글 <span class="replyCnt">${board.replyCnt }</span>개
 			</div>
 
 			<div class="panel-body">
@@ -82,6 +82,7 @@
 				success: function (data) {
 
 					makeList(data);
+					
 
 				}
 			})
@@ -103,22 +104,42 @@
 				}
 			}
 		})
+
+		//삭제 처리
+		$(document).on('click', '.delBtn', function() {
+			const rno = $(this).data('rno');
+			if (confirm('정말 삭제하시겠습니까?')) {
+				$.ajax({
+					url: "../replies/" + rno,
+					type: "DELETE",
+					dataType: "text",
+					success: function (data) {
+						data ? alert('삭제되었습니다.') : alert('에러 발생');
+						$(this).parent().parent().remove();
+
+					}
+			})
+
+			}
+		})
 	})
 
 	function makeList(data) {
-		const liTag = $('<li />').addClass("left clearfix").attr(
-			'data-rno', '12');
-		const divTag_1 = $('<div />');
+		// const comment = $('<div />').addClass("comment");
+		const liTag = $('<li />').addClass("left clearfix");
+		const divTag_1 = $('<div />').addClass("comment");
 		const divTag_2 = $('<div />').addClass('header');
 		const strong = $('<strong />').addClass('primary-font')
-			.text(data.replyer);
+			.text(data.replyer + " ");
+		const span_del = $('<span />').addClass('delBtn').text('삭제').attr(
+			'data-rno', data.rno);
 		const small = $('<small />').addClass(
 			'pull-right text-muted').text(displayTime(data.replyDate));
 		const pTag = $('<p />').text(data.reply);
 
 		$('.chat').append(liTag, divTag_1);
 		$(divTag_1).append(divTag_2, pTag);
-		$(divTag_2).append(strong, small);
+		$(divTag_2).append(strong, span_del, small);
 	}
 	
 	function displayTime(timeValue) {

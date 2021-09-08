@@ -15,7 +15,7 @@ tr:hover {
 	
 	$(function() {
 	let actionForm = $("#actionForm");
-		$(".move").on("click", function(e) {
+		$("tr .move").on("click", function(e) {
 			e.preventDefault();
 			
 			let bno = $(this).attr('href');
@@ -58,7 +58,7 @@ tr:hover {
 					<c:forEach var="board" items="${list }">
 						<tr>
 							<td>${board.bno }</td>
-							<td><a class="move" href="${board.bno }">${board.title }</a></td>
+							<td><a class="move" href="${board.bno }">${board.title }</a> <strong>[${board.replyCnt }]</strong></td>
 							<td>${board.writer }</td>
 							<td><fmt:formatDate value="${board.regdate }"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>

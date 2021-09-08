@@ -2,6 +2,8 @@ package co.pooh.app.board.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import co.pooh.app.board.vo.BoardVO;
 import co.pooh.app.board.vo.Criteria;
 
@@ -25,4 +27,7 @@ public interface BoardMapper {
 	
 	//데이터 건수 조회
 	public int getTotalCount(Criteria criteria);
+	
+	//댓글 수 업데이트
+	public int updateReplycnt(@Param("bno") long bno, @Param("amount") long amount);
 }
