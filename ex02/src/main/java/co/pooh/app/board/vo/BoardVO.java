@@ -1,6 +1,7 @@
 package co.pooh.app.board.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,4 +21,6 @@ public class BoardVO {
 	private Date regdate;    //작성일자
 	private Date updatedate; //수정일자
 	private int replyCnt;
+	
+	private List<BoardAttachVO> attachList;
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="row">
 	<div class="col-lg-6">
@@ -9,29 +10,44 @@
 		<h3>게시글 상세보기</h3>
 
 		<div class="form-group">
-			<label>제목</label> <input class="form-control" id="title" name="title" value="${board.title }" disabled>
+			<label>제목</label> <input class="form-control" id="title" name="title"
+				value="${board.title }" disabled>
 		</div>
 		<div class="form-group">
-			<fmt:formatDate var="regdate" value="${board.regdate }" type="DATE" pattern="yyyy-MM-dd" />
-			<label>작성일자</label> <input class="form-control" id="title" name="title" value="${regdate}" disabled>
+			<fmt:formatDate var="regdate" value="${board.regdate }" type="DATE"
+				pattern="yyyy-MM-dd" />
+			<label>작성일자</label> <input class="form-control" id="title"
+				name="title" value="${regdate}" disabled>
 		</div>
 		<div class="form-group">
-			<fmt:formatDate var="updatedate" value="${board.updatedate }" type="DATE" pattern="yyyy-MM-dd" />
-			<label>수정일자</label> <input class="form-control" id="title" name="title" value="${updatedate}" disabled>
+			<fmt:formatDate var="updatedate" value="${board.updatedate }"
+				type="DATE" pattern="yyyy-MM-dd" />
+			<label>수정일자</label> <input class="form-control" id="title"
+				name="title" value="${updatedate}" disabled>
 		</div>
 		<div class="form-group">
-			<label>작성자</label> <input class="form-control" id="writer" name="writer" value="${board.writer }" disabled>
+			<label>작성자</label> <input class="form-control" id="writer"
+				name="writer" value="${board.writer }" disabled>
 		</div>
 		<div class="form-group">
 			<label>내용</label>
-			<textarea class="form-control" id="content" name="content" rows="10" disabled>${board.content }</textarea>
+			<textarea class="form-control" id="content" name="content" rows="10"
+				disabled>${board.content }</textarea>
+		</div>
+		<div class="form-group">
+			<label>첨부파일</label>
+			<c:forEach items="${board.attachList }" var="attach">
+				<a href="download?uuid=${attach.uuid }">${attach.fileName }</a>
+			</c:forEach>
 		</div>
 
 		<button type="button" class="btn btn-outline btn-info"
 			onclick="location.href='${pageContext.request.contextPath }/board/register'">등록</button>
-		<form method="POST" action="${pageContext.request.contextPath }/board/modifyForm">
-			<input type="hidden" name="bno" value="${board.bno }"> <input type="hidden" name="title"
-				value="${board.title }"> <input type="hidden" name="writer" value="${board.writer }">
+		<form method="POST"
+			action="${pageContext.request.contextPath }/board/modifyForm">
+			<input type="hidden" name="bno" value="${board.bno }"> <input
+				type="hidden" name="title" value="${board.title }"> <input
+				type="hidden" name="writer" value="${board.writer }">
 			<button class="btn btn-outline btn-info">수정</button>
 			<button class="btn btn-outline btn-info"
 				formaction="${pageContext.request.contextPath }/board/delete">삭제</button>
@@ -42,7 +58,8 @@
 		<!-- 댓글 등록 -->
 		<div class="panel-heading">
 			<form id="replyForm">
-				<input type="hidden" name="bno" value="${board.bno }"> <input name="replyer"> <input name="reply">
+				<input type="hidden" name="bno" value="${board.bno }"> <input
+					name="replyer"> <input name="reply">
 
 				<button type="button" id="saveReply">댓글 등록</button>
 			</form>
