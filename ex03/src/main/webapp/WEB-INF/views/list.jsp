@@ -12,6 +12,7 @@
 	<c:forEach var="list" items="${list }">
 	
 		${list.employeeId }<br>
+		${list.salary }<br>
 	</c:forEach>
 </body>
 </html>
