@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,15 @@ public class DeptController {
 		return deptService.getList();
 	}
 	
+	@GetMapping("read/{departmentId}")
+	@ResponseBody
+	public DeptVO read(@PathVariable int departmentId) {
+		DeptVO vo = new DeptVO();
+		vo.setDepartmentId(departmentId);
+		
+		return deptService.read(vo);
+	}
+	
 	@PostMapping("insert")
 	@ResponseBody
 	public DeptVO insert(@RequestBody DeptVO vo) {
@@ -46,5 +56,12 @@ public class DeptController {
 		vo.setDepartmentId(departmentId);
 		return deptService.delete(vo);
 
+	}
+	
+	@PutMapping("update")
+	@ResponseBody
+	public DeptVO update(@RequestBody DeptVO vo) {
+		deptService.update(vo);
+		return deptService.read(vo);
 	}
 }
