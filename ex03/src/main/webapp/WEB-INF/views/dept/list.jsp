@@ -215,9 +215,7 @@ tr:hover {
 						contentType: "application/json",
 						success: function(data) {
 							$('#updateModal').modal('hide');
-							
-							
-							
+
 							deptList();
 							
 						}
