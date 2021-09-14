@@ -41,7 +41,7 @@
 				users-by-username-query="select id, password, 1 from users where id=?"
 
 				authorities-by-username-query="select id, 'ROLE_' || upper(role) from users where id=?" />
-			<security:password-encoder hash="bcrypt"/>
+			<security:password-encoder hash="bcrypt" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
