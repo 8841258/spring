@@ -40,7 +40,7 @@ public class KakaoController {
 		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
 				new HttpEntity<>(params, headers); //header, param 값을 가진 엔터티
 		
-		//POST 방식으로 Http 요청하기 , 그리고 response 변수에 응답받기
+		//POST 방식으로 Http 요청하기, 그리고 response 변수에 응답받기
 		ResponseEntity<String> response = rt.exchange(
 				"https://kauth.kakao.com/oauth/token",
 				HttpMethod.POST,
